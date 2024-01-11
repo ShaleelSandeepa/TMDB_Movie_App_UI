@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.sizeOf(context);
     Color darkBlue = const Color(0xFF0d253f);
     Color lightBlue = const Color(0xFF01b4e4);
-    Color lightGreen = const Color(0xFF90cea1);
+
     return Scaffold(
       backgroundColor: darkBlue,
       body: SafeArea(
@@ -279,56 +279,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: movies.length,
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: size.width * 0.275,
-                            height: size.height * 0.225,
-                            decoration: BoxDecoration(
-                              color: lightBlue.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  movies[index].posterPath!,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MovieScreen(movie: movies[index]),
+                                ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: size.width * 0.275,
+                              height: size.height * 0.225,
+                              decoration: BoxDecoration(
+                                color: lightBlue.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    movies[index].posterPath!,
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  bottom: 5,
-                                  left: 5,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.6),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2, horizontal: 3),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              movies[index]
-                                                  .voteAverage!
-                                                  .toStringAsFixed(1),
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            const Icon(
-                                              Icons.star_rate_rounded,
-                                              color: Colors.amber,
-                                              size: 18,
-                                            )
-                                          ],
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    bottom: 5,
+                                    left: 5,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.6),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 3),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                movies[index]
+                                                    .voteAverage!
+                                                    .toStringAsFixed(1),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              const Icon(
+                                                Icons.star_rate_rounded,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -383,56 +394,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: movies.length,
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: size.width * 0.275,
-                            height: size.height * 0.225,
-                            decoration: BoxDecoration(
-                              color: lightBlue.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  movies[index].posterPath!,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MovieScreen(movie: movies[index]),
+                                ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: size.width * 0.275,
+                              height: size.height * 0.225,
+                              decoration: BoxDecoration(
+                                color: lightBlue.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    movies[index].posterPath!,
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  bottom: 5,
-                                  left: 5,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.6),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2, horizontal: 3),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              movies[index]
-                                                  .voteAverage!
-                                                  .toStringAsFixed(1),
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            const Icon(
-                                              Icons.star_rate_rounded,
-                                              color: Colors.amber,
-                                              size: 18,
-                                            )
-                                          ],
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    bottom: 5,
+                                    left: 5,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(0.6),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 3),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                movies[index]
+                                                    .voteAverage!
+                                                    .toStringAsFixed(1),
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              const Icon(
+                                                Icons.star_rate_rounded,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
