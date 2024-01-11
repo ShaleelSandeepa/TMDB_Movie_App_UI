@@ -1,10 +1,11 @@
 import 'package:tmdb_movie_app_ui/models/company_model.dart';
+import 'package:tmdb_movie_app_ui/models/genres_model.dart';
 
 class MovieDetailsModel {
   String? overview;
   List<CompanyModel>? companies;
   String? tagline;
-  List<Map<String, dynamic>>? genres;
+  List<GenresModel>? genres;
 
   MovieDetailsModel({
     required this.companies,
@@ -18,11 +19,14 @@ class MovieDetailsModel {
         .map((company) => CompanyModel.fromJson(company))
         .toList();
 
+    List<GenresModel> genres =
+        (map["genres"] as List).map((e) => GenresModel.fromJson(e)).toList();
+
     return MovieDetailsModel(
       companies: companies,
       overview: map["overview"],
-      tagline: map["tagline"],
-      genres: map["genres"] ?? "",
+      tagline: map["tagline"] ?? "",
+      genres: genres,
     );
   }
 }
