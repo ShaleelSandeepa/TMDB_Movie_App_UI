@@ -14,7 +14,9 @@ class CompanyModel {
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) {
     return CompanyModel(
-      logoPath: json["logo_path"],
+      logoPath: json['logo_path'] != null
+          ? "https://image.tmdb.org/t/p/w500${json['logo_path']}"
+          : "https://cdn-icons-png.flaticon.com/512/2399/2399925.png",
       name: json["name"],
     );
   }
