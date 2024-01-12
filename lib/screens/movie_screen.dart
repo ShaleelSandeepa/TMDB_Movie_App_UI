@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app_ui/models/actor_model.dart';
 import 'package:tmdb_movie_app_ui/models/movie_details.dart';
 import 'package:tmdb_movie_app_ui/models/movie_model.dart';
+import 'package:tmdb_movie_app_ui/screens/actors_screen.dart';
 import 'package:tmdb_movie_app_ui/services/api_services.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -41,6 +42,7 @@ class _MovieScreenState extends State<MovieScreen> {
                     width: size.width,
                     height: size.height * 0.25,
                     decoration: BoxDecoration(
+                      color: lightBlue.withOpacity(0.5),
                       image: DecorationImage(
                           image: NetworkImage(widget.movie.backdropPath!),
                           fit: BoxFit.cover),
@@ -84,6 +86,10 @@ class _MovieScreenState extends State<MovieScreen> {
                               ),
                               Text(
                                 snapshot.data!.tagline!,
+                                style: const TextStyle(color: Colors.white70),
+                              ),
+                              Text(
+                                snapshot.data!.releaseDate!,
                                 style: const TextStyle(color: Colors.white70),
                               ),
                               const Divider(),
@@ -188,130 +194,161 @@ class _MovieScreenState extends State<MovieScreen> {
                                 height: 10,
                               ),
                               const Divider(),
-                              const Text(
-                                "Cast",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Cast",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) => ActorsScreen(
+                                                movie: widget.movie),
+                                          ));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white24,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "See all",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               FutureBuilder(
-                                  future: ApiServices()
-                                      .getActorsDetails(widget.movie.id!),
-                                  builder: (context, snap) {
-                                    if (snap.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const Center(
-                                        child: CupertinoActivityIndicator(
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                    }
-                                    if (snap.hasData) {
-                                      List<ActorModel> actors = snap.data!;
-                                      return ListView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemCount: snap.data!.length >= 10
-                                            ? 10
-                                            : snap.data!.length,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 80,
-                                                  height: 120,
-                                                  decoration: BoxDecoration(
-                                                    color: lightBlue,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    image: DecorationImage(
-                                                        image: NetworkImage(
-                                                            actors[index]
-                                                                .image!),
-                                                        fit: BoxFit.fitWidth),
+                                future: ApiServices()
+                                    .getActorsDetails(widget.movie.id!),
+                                builder: (context, snap) {
+                                  if (snap.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                      child: CupertinoActivityIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    );
+                                  }
+                                  if (snap.hasData) {
+                                    List<ActorModel> actors = snap.data!;
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: snap.data!.length >= 10
+                                          ? 10
+                                          : snap.data!.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: 80,
+                                                height: 120,
+                                                decoration: BoxDecoration(
+                                                  color: lightBlue
+                                                      .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          actors[index].image!),
+                                                      fit: BoxFit.fitWidth),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    actors[index].name!,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
                                                   ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      actors[index].name!,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                      ),
+                                                  Text(
+                                                    actors[index].charactor!,
+                                                    style: const TextStyle(
+                                                      color: Colors.white70,
+                                                      fontSize: 13,
                                                     ),
-                                                    Text(
-                                                      actors[index].charactor!,
-                                                      style: const TextStyle(
-                                                        color: Colors.white70,
-                                                        fontSize: 13,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.black
-                                                              .withOpacity(0.6),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 3,
-                                                                horizontal: 4),
-                                                        child: Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                actors[index]
-                                                                    .popularity!
-                                                                    .toStringAsFixed(
-                                                                        1),
-                                                                style: const TextStyle(
-                                                                    color: Colors
-                                                                        .white),
-                                                              ),
-                                                              const Icon(
-                                                                Icons
-                                                                    .star_rate_rounded,
-                                                                color: Colors
-                                                                    .amber,
-                                                                size: 18,
-                                                              )
-                                                            ],
-                                                          ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.black
+                                                            .withOpacity(0.6),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 3,
+                                                          horizontal: 4),
+                                                      child: Center(
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              actors[index]
+                                                                  .popularity!
+                                                                  .toStringAsFixed(
+                                                                      1),
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            const Icon(
+                                                              Icons
+                                                                  .star_rate_rounded,
+                                                              color:
+                                                                  Colors.amber,
+                                                              size: 18,
+                                                            )
+                                                          ],
                                                         ),
                                                       ),
                                                     ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    }
-                                    return const SizedBox();
-                                  })
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
+                                  return const SizedBox();
+                                },
+                              ),
                             ],
                           ),
                         ),

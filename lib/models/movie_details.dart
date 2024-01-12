@@ -6,12 +6,14 @@ class MovieDetailsModel {
   List<CompanyModel>? companies;
   String? tagline;
   List<GenresModel>? genres;
+  String? releaseDate;
 
   MovieDetailsModel({
     required this.companies,
     required this.overview,
     required this.tagline,
     required this.genres,
+    required this.releaseDate,
   });
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> map) {
@@ -27,6 +29,7 @@ class MovieDetailsModel {
       overview: map["overview"],
       tagline: map["tagline"] ?? "",
       genres: genres,
+      releaseDate: map["release_date"] ?? "",
     );
   }
 }

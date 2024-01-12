@@ -3,6 +3,7 @@ class MovieModel {
   String? backdropPath;
   String? posterPath;
   String? title;
+
   double? voteAverage;
 
   MovieModel({

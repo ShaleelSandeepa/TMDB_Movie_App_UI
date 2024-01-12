@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb_movie_app_ui/models/movie_model.dart';
 import 'package:tmdb_movie_app_ui/screens/movie_screen.dart';
+import 'package:tmdb_movie_app_ui/screens/search_results.dart';
 import 'package:tmdb_movie_app_ui/services/api_services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,13 +16,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ApiServices services = ApiServices();
   List<MovieModel>? movies = [];
+  TextEditingController quaryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     Color darkBlue = const Color(0xFF0d253f);
     Color lightBlue = const Color(0xFF01b4e4);
-
+    quaryController.clear();
     return Scaffold(
       backgroundColor: darkBlue,
       body: SafeArea(
@@ -75,11 +77,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               hintText: "Search",
                               hintStyle: TextStyle(color: Colors.white38)),
                           cursorColor: lightBlue,
+                          controller: quaryController,
                         ),
                       ),
-                      const Icon(
-                        Icons.search_rounded,
-                        color: Colors.white,
+                      GestureDetector(
+                        onTap: () async {
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SearchResults(query: quaryController.text),
+                              ));
+                          quaryController.clear();
+                        },
+                        child: const Icon(
+                          Icons.search_rounded,
+                          color: Colors.white,
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
