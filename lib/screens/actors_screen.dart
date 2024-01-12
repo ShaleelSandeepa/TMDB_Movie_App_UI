@@ -16,7 +16,6 @@ class ActorsScreen extends StatefulWidget {
 class _ActorsScreenState extends State<ActorsScreen> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     Color darkBlue = const Color(0xFF0d253f);
     Color lightBlue = const Color(0xFF01b4e4);
     return Scaffold(
