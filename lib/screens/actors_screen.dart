@@ -71,55 +71,60 @@ class _ActorsScreenState extends State<ActorsScreen> {
                         const SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              actors[index].name!,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                actors[index].name!,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
                               ),
-                            ),
-                            Text(
-                              actors[index].charactor!,
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 13,
+                              Text(
+                                actors[index].charactor!,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.6),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 3, horizontal: 4),
-                                child: Center(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        actors[index]
-                                            .popularity!
-                                            .toStringAsFixed(1),
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                      const Icon(
-                                        Icons.star_rate_rounded,
-                                        color: Colors.amber,
-                                        size: 18,
-                                      )
-                                    ],
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 3, horizontal: 4),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          actors[index]
+                                              .popularity!
+                                              .toStringAsFixed(1),
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        const Icon(
+                                          Icons.star_rate_rounded,
+                                          color: Colors.amber,
+                                          size: 18,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )
                       ],
                     ),
