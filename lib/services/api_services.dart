@@ -31,15 +31,19 @@ class ApiServices {
   }
 
   Future<List> getTopRatedMovies() async {
-    Response response = await get(Uri.parse("$topRatedMovies$apiKey"));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      List<dynamic> results = body["results"];
-      List<MovieModel> movies =
-          results.map((movie) => MovieModel.fromJson(movie)).toList();
-      return movies;
-    } else {
-      Logger().e(response.statusCode);
+    try {
+      Response response = await get(Uri.parse("$topRatedMovies$apiKey"));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> body = jsonDecode(response.body);
+        List<dynamic> results = body["results"];
+        List<MovieModel> movies =
+            results.map((movie) => MovieModel.fromJson(movie)).toList();
+        return movies;
+      } else {
+        Logger().e(response.statusCode);
+        return [];
+      }
+    } catch (e) {
       return [];
     }
   }

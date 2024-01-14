@@ -42,7 +42,13 @@ class _SearchResultsState extends State<SearchResults> {
             ));
           }
           if (snapshot.hasError) {
-            return const Center(child: Text("Something went wrong !"));
+            return const Center(
+                child: Text(
+              "Something went wrong !",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ));
           }
           List<MovieModel>? movies = snapshot.data!;
           return GridView.builder(
