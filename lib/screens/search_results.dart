@@ -114,27 +114,6 @@ class _SearchResultsState extends State<SearchResults> {
                             ),
                           ),
                         ),
-                        // Positioned(
-                        //   top: 5,
-                        //   left: 5,
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.black.withOpacity(0.5),
-                        //       borderRadius: BorderRadius.circular(10),
-                        //     ),
-                        //     padding: const EdgeInsets.all(4.0),
-                        //     child: Text(
-                        //       movies[index]
-                        //           .title
-                        //           .toString()
-                        //           .replaceAll(": ", " :\n"),
-                        //       style: const TextStyle(
-                        //           color: Colors.white,
-                        //           fontWeight: FontWeight.bold,
-                        //           fontSize: 14),
-                        //     ),
-                        //   ),
-                        // )
                       ],
                     ),
                   ),
